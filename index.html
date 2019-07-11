@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>game</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		canvas {
+			display: block;
+			margin: 0 auto;
+			border: 1px solid red;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="myCanvas" width="360" height="512"></canvas>
+
+	<script type="text/javascript" src="js/Background.js"></script>
+	<script type="text/javascript" src="js/Bird.js"></script>
+	<script type="text/javascript" src="js/Game.js"></script>
+	<script type="text/javascript" src="js/Pipe.js"></script>
+
+
+	<script type="text/javascript">
+		var imgArr = ['images/bg_day.png', 'images/bird0_0.png', 'images/bird0_1.png', 'images/bird0_2.png', 'images/land.png', 'images/pipe_down.png', 'images/pipe_up.png'];
+		// 加载所有图片
+		function loadImgs(imgArr, callBack){
+			var idx = 0;
+			var loadImgArr = [];
+			imgArr.forEach(function(value, index){
+				var img = new Image();
+				img.src = value;
+				img.onload = function(){
+					idx++;
+					loadImgArr[index] = this;
+					if(idx === imgArr.length){
+						callBack(loadImgArr);
+					}
+				}
+			})
+		}
+		//调用loadImgs
+		loadImgs(imgArr, function(img) {
+			// 获取元素
+			var canvas = document.getElementById('myCanvas');
+			// 获取画笔
+			var ctx = canvas.getContext('2d');
+
+			// 初始化bird
+			var bird = new Bird(img.slice(1, 4), 100, 100);
+			// 初始化pipe
+			var pipe = new Pipe(img[5], img[6], 4, 360);
+			// 初始化land
+			var land = new Background(img[4], 4, 0, 400);
+			// 初始化mountain
+			var mountain = new Background(img[0], 2, 0, 0);
+
+			// 开始游戏
+			window.g = new Game(ctx, bird, pipe, land, mountain);
+		})
+
+
+	</script>
+</body>
+</html>
