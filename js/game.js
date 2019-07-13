@@ -107,7 +107,7 @@ Game.prototype.renderPipe = function(){
 		var canvas_y = 0;
 		var canvas_w = img_up.width;
 		var canvas_h = value.up_height;
-		that.ctx.drawImage(img_up, img_x, img_y, img_w, img_y, canvas_x, canvas_y, canvas_w, canvas_h);
+		that.ctx.drawImage(img_up, img_x, img_y, img_w, img_h, canvas_x, canvas_y, canvas_w, canvas_h);
 
 		//获取下馆子的图片
 		var img_down = value.pipe_down;
@@ -119,7 +119,7 @@ Game.prototype.renderPipe = function(){
 		var canvas_down_y = value.up_height + 150;
 		var canvas_down_w = img_down.width;
 		var canvas_down_h = value.down_height;
-		that.ctx.drawImage(img_down, img_down_x, img_down_y, img_down_w, img_down_y, canvas_down_x, canvas_down_y, canvas_down_w, canvas_down_h);
+		that.ctx.drawImage(img_down, img_down_x, img_down_y, img_down_w, img_down_h, canvas_down_x, canvas_down_y, canvas_down_w, canvas_down_h);
 
 	})
 }
@@ -138,7 +138,7 @@ Game.prototype.createPipe = function(){
 Game.prototype.clearPipe = function(){
 	for(var i = 0; i < this.pipeArr.length; i++){
 		var pipe = this.pipeArr[i];
-		if(pipe.x - pipe.pipe_up.width){
+		if(pipe.x - pipe.step * pipe.count < - pipe.pipe_up.width){
 			this.pipeArr.splice(i, 1);
 			return;
 		}

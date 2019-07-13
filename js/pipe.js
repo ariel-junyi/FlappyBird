@@ -18,3 +18,4 @@ Pipe.prototype.createPipe = function(){
 	return new Pipe(this.pipe_up, this.pipe_down, this.step, this.x);
 }
 
+
