@@ -320,6 +320,7 @@ Game.prototype.check = function() {
 		// 用Bird_B点与pipe_C点进行比较
 		if (Bird_B.x >= pipe_C.x && Bird_B.y <= pipe_C.y && Bird_A.x <= pipe_D.x) {
 			console.log('撞到上管子了');
+			this.gameOver();
 		}
 
 		if (Bird_D.x >= pipe_down_A.x && Bird_D.y >= pipe_down_A.y && Bird_A.x <= pipe_down_D.x) {
